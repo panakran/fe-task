@@ -1,0 +1,1 @@
+export const GET_POIS_MODEL = 'GET_POIS_MODEL';
