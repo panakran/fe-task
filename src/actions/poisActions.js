@@ -1,4 +1,8 @@
 import { GET_POIS_MODEL } from '../constants/types';
+import Geolocation from '@react-native-community/geolocation';
+import { PermissionsAndroid } from 'react-native';
+import { sortByDistance, sortAlphabetically } from '../utils/distanceUtils';
+
 
 export function setPois(poisModel) {
     return {
@@ -10,8 +14,7 @@ export function setPois(poisModel) {
 export function getPois() {
     return async (dispatch) => {
         try {
-            let poisModel;
-            poisModel.user = null
+            let poisModel = { user: { permission: null, location: null } };
 
             //GET POIS
             const apiReq = await fetch('https://warply.s3.amazonaws.com/data/test_pois.json', {
@@ -19,13 +22,20 @@ export function getPois() {
             });
             poisModel.poisList = await apiReq.json();
 
-            //GET USER PERMISION ANDLOCATION
-            let { status } = await Permissions.askAsync(Permissions.LOCATION);
-            poisModel.user.permission = status === 'granted';
+            //GET USER PERMISION AND LOCATION
+            const granted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
+            poisModel.user.permission = granted;
 
-            let response = await Location.getCurrentPositionAsync({});
-            poisModel.user.location = response.coords;
+            if (granted) {
+                const getPosition = () => new Promise((resolve, reject) => Geolocation.getCurrentPosition(resolve, reject));
+                const geoLOcationResponse = await getPosition();
+                poisModel.user.location = geoLOcationResponse.coords
+            }
 
+            poisModel.poisList =
+                granted
+                    ? sortByDistance(poisModel.user.location, poisModel.poisList)
+                    : sortAlphabetically(poisModel.poisList);
 
             await dispatch(setPois(poisModel));
             return poisModel || {};

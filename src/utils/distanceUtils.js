@@ -1,4 +1,4 @@
-export const crowDistanceCalc = (latA, lonA, latB, lonB) => {
+const calcCrowDistance = (latA, lonA, latB, lonB) => {
 
     const toRad = coord => (coord * Math.PI) / 180;
     const R = 6371; // Earth R in km
@@ -15,3 +15,21 @@ export const crowDistanceCalc = (latA, lonA, latB, lonB) => {
 
     return d;
 };
+
+export const sortByDistance = (currentLocation, poisList) => {
+
+    const distanceFromCurrentLocation = (lat, lon) =>
+        calcCrowDistance(currentLocation.latitude, currentLocation.longitude, lat, lon);
+
+    return poisList
+        .map(e => {
+            return {
+                ...e,
+                distance: distanceFromCurrentLocation(Number(e.latitude), Number(e.longitude))
+            };
+        })
+        .sort((a, b) => a.distance - b.distance);
+
+};
+
+export const sortAlphabetically = (poisList) => poisList.sort((a, b) => ("" + a.address).localeCompare(b.address));
