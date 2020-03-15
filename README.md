@@ -8,7 +8,7 @@ Locations of POIS presented to a map using clustering technique.
 
 ### Installation
 
-> Install react native and android studio dependencies as described (here)[https://reactnative.dev/docs/getting-started]
+> Install react native and android studio dependencies as described [here](https://reactnative.dev/docs/getting-started)
 
 - Clone repo
 - Install app to device or emulator `npm react-native run-android`
