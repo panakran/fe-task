@@ -11,5 +11,5 @@ Locations of POIS presented to a map using clustering technique.
 > Install react native and android studio dependencies as described [here](https://reactnative.dev/docs/getting-started)
 
 - Clone repo
-- Install app to device or emulator `npm react-native run-android`
+- Install app to device or emulator `npx react-native run-android`
 - Live development `npm start`
