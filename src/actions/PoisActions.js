@@ -26,8 +26,6 @@ export function getPois() {
             const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
             poisModel.user.permission = granted==="granted";
 
-
-
             if (poisModel.user.permission) {
                 const getPosition = () => new Promise((resolve, reject) => Geolocation.getCurrentPosition(resolve, reject));
                 const geoLocationResponse = await getPosition();
