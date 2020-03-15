@@ -23,17 +23,19 @@ export function getPois() {
             poisModel.poisList = await apiReq.json();
 
             //GET USER PERMISION AND LOCATION
-            const granted = await PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION);
-            poisModel.user.permission = granted;
+            const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION)
+            poisModel.user.permission = granted==="granted";
 
-            if (granted) {
+
+
+            if (poisModel.user.permission) {
                 const getPosition = () => new Promise((resolve, reject) => Geolocation.getCurrentPosition(resolve, reject));
-                const geoLOcationResponse = await getPosition();
-                poisModel.user.location = geoLOcationResponse.coords
+                const geoLocationResponse = await getPosition();
+                poisModel.user.location = geoLocationResponse.coords
             }
 
             poisModel.poisList =
-                granted
+            poisModel.user.permission
                     ? sortByDistance(poisModel.user.location, poisModel.poisList)
                     : sortAlphabetically(poisModel.poisList);
 

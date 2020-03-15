@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { StyleSheet, View, Text } from 'react-native';
 import PoisList from '../components/PoisList';
 import PoisMap from '../components/PoisMap';
 
