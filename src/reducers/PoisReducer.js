@@ -4,7 +4,7 @@ const initialState = {
     poisModel: {}
 };
 
-const poisReducer = (state = initialState, action) => {
+const PoisReducer = (state = initialState, action) => {
     switch(action.type) {
         case GET_POIS_MODEL:
             return {
@@ -16,4 +16,4 @@ const poisReducer = (state = initialState, action) => {
     }
 }
 
-export default poisReducer;
+export default PoisReducer;

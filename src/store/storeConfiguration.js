@@ -1,9 +1,9 @@
 import { createStore, combineReducers } from 'redux';
-import poisReducer from '../reducers/poisReducer';
+import PoisReducer from '../reducers/PoisReducer';
 import { applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 
-const rootReducer = combineReducers({ poisModel: poisReducer });
+const rootReducer = combineReducers({ poisModel: PoisReducer });
 const storeConfiguration = () => createStore(rootReducer, applyMiddleware(thunk));
 
 export default storeConfiguration;

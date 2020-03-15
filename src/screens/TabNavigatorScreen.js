@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import PoisList from '../components/PoisList';
-import PoisMap from '../components/PoisMap';
+import PoisListScreen from './PoisListScreen';
+import PoisMapScreen from './PoisMapScreen';
 
 // Create Tab Navigator
 const Tab = createBottomTabNavigator();
 
-export default function PoisScreen() {
+export default function TanNavigatorScreen() {
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -14,8 +14,8 @@ export default function PoisScreen() {
         inactiveTintColor: 'gray',
       }}
     >
-      <Tab.Screen name="Available pois" component={PoisList} />
-      <Tab.Screen name="Pois locations" component={PoisMap} />
+      <Tab.Screen name="Available pois" component={PoisListScreen} />
+      <Tab.Screen name="Pois locations" component={PoisMapScreen} />
     </Tab.Navigator>
   );
 }

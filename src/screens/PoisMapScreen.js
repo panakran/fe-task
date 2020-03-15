@@ -5,9 +5,9 @@ import { Marker } from 'react-native-maps'
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as poisActions from '../actions/poisActions';
+import * as PoisActions from '../actions/PoisActions';
 
-class PoisMap extends Component {
+class PoisMapScreen extends Component {
 
     renderMarker = data => (
         <View key={data.location.latitude}>
@@ -91,11 +91,11 @@ const mapStateToProps = state => ({
 
 const ActionCreators = Object.assign(
     {},
-    poisActions
+    PoisActions
 );
 
 const mapDispatchToProps = dispatch => ({
     actions: bindActionCreators(ActionCreators, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PoisMap);
+export default connect(mapStateToProps, mapDispatchToProps)(PoisMapScreen);

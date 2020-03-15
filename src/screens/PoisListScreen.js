@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as poisActions from '../actions/poisActions';
-import ListItem from './ListItem';
+import * as PoisActions from '../actions/PoisActions';
+import ListItem from '../components/ListItem';
 
-class PoisList extends Component {
+class PoisListScreen extends Component {
 
   componentDidMount() {
     let { actions } = this.props;
@@ -35,11 +35,11 @@ const mapStateToProps = state => ({
 
 const ActionCreators = Object.assign(
   {},
-  poisActions
+  PoisActions
 );
 
 const mapDispatchToProps = dispatch => ({
   actions: bindActionCreators(ActionCreators, dispatch),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(PoisList);
+export default connect(mapStateToProps, mapDispatchToProps)(PoisListScreen);
